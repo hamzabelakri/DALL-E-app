@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import FormField from "./FormField";
 import Loader from "./Loader";
+import {getAllPosts} from "../Redux/Actions/postAction";
+import Card from "./Card"
 function Home() {
   const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState('');
+  const { posts } = useSelector((state) => state.postReducer);
+/*   console.log(posts)
+ */  const dispatch = useDispatch();
 
+
+  useEffect(() => {
+    dispatch(getAllPosts());
+  }, [dispatch]);
   return (
     <section className="max-w-7xl mx-auto">
       <div>
@@ -35,6 +45,11 @@ function Home() {
               <h2 className="font-medium text-[#666e75] text-xl mb-3">
                 Showing Resuls for <span className="text-[#222328]">{searchText}</span>:
               </h2>)}
+
+
+              <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
+            {/*   {posts && posts.map((elt) => <Card key={elt._id} elt={elt} />)} */}
+            </div>
            </>
             )}
         </div>

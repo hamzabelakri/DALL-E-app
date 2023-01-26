@@ -1,20 +1,48 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getImage } from "../Redux/Actions/imageAction";
+import { addPost } from "../Redux/Actions/postAction";
 import { preview } from "../assets";
 import Loader from "./Loader";
 import FormField from "./FormField";
+import { getRandomPrompt } from "../utils";
+
 function Post() {
   const navigate = useNavigate();
-
+const dispatch = useDispatch();
   const [form, setForm] = useState({
     name: "",
     prompt: "",
     photo: "",
   });
+  const {image} = useSelector((state) => state.imageReducer);
 
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const handleChange = (event) => {
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
+
+  const handleSurpriseMe = () => {
+    const randomPrompt = getRandomPrompt(form.prompt);
+    setForm({ ...form, prompt: randomPrompt });
+  };
+
+  const generateImage  =(event) => {
+    dispatch(getImage(form));
+    setGeneratingImg(true);
+    setForm({ ...form, photo: image });
+  }
+
+  const handleSubmit = (event) => {
+    dispatch(addPost(form));
+    console.log(form)
+    event.preventDefault();
+
+  };
+
   return (
     <section className="max-w-7xl mx-auto">
       <div>
@@ -24,7 +52,7 @@ function Post() {
           community
         </p>
       </div>
-      <form className="mt-16 max-w-3xl">
+      <form className="mt-16 max-w-3xl" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-5">
           <FormField
             labelName="Your Name"
@@ -32,9 +60,8 @@ function Post() {
             name="name"
             placeholder="Ex., john doe"
             className="font-semibold text-xs bg-[#EcECF1] py-1 px-2 rounded-[5px] text-black"
-
-            /*   value={form.name}
-            handleChange={handleChange} */
+            value={form.name}
+            handleChange={handleChange}
           />
 
           <FormField
@@ -43,16 +70,15 @@ function Post() {
             name="prompt"
             placeholder="An Impressionist oil painting of sunflowers in a purple vase…"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#6469ff] focus:border-[#6469ff] outline-none block w-full p-3"
-
-            /*   value={form.prompt}
+            value={form.prompt}
             handleChange={handleChange}
             isSurpriseMe
-            handleSurpriseMe={handleSurpriseMe} */
+            handleSurpriseMe={handleSurpriseMe}
           />
           <div className="relative bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center">
-            {form.photo ? (
+            {image ? (
               <img
-                src={form.photo}
+                src={image}
                 alt={form.prompt}
                 className="w-full h-full object-contain"
               />
@@ -73,7 +99,7 @@ function Post() {
           <div className="mt-5 flex gap-5">
             <button
               type="button"
-              /*  onClick={generateImage} */
+             onClick={generateImage} 
               className=" text-white bg-green-700 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center"
             >
               {generatingImg ? "Generating..." : "Generate"}
@@ -81,12 +107,15 @@ function Post() {
           </div>
         </div>
         <div className="mt-10">
-          <p className="mt-2 text-[#666e75] text-[14px]">** Once you have created the image you want, you can share it with others in the community **</p>
+          <p className="mt-2 text-[#666e75] text-[14px]">
+            ** Once you have created the image you want, you can share it with
+            others in the community **
+          </p>
           <button
             type="submit"
             className="mt-3 text-white bg-[#6469ff] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center"
           >
-            {loading ? 'Sharing...' : 'Share with the Community'}
+            {loading ? "Sharing..." : "Share with the Community"}
           </button>
         </div>
       </form>
