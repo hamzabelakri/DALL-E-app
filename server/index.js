@@ -9,11 +9,8 @@ const dalleRouter = require("./Routes/dalleRouter");
 app.use(express.json());
 app.use(cors());
 
-app.use('/api/v1/post', postRouter);
-app.use('/api/v1/dalle', dalleRouter);
-
-
-
+app.use("/api/v1/post", postRouter);
+app.use("/api/v1/dalle", dalleRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`server is running on port ${process.env.PORT}`);
