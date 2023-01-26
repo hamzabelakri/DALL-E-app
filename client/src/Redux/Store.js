@@ -3,7 +3,7 @@ import {
     applyMiddleware,
     compose,
   } from "redux";
-/*   import rootReducer from "./Reducers/index"; */
+ import postReducer from "./Reducers/postReducer"; 
   import thunk from "redux-thunk";
   
   function saveToLocalStorage(state) {
@@ -29,7 +29,7 @@ import {
   const persistedState = loadFromLocalStorage();
   
   const store = createStore(
-  /*   rootReducer, */
+ postReducer, 
     persistedState,
     compose(
       applyMiddleware(thunk),
