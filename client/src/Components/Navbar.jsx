@@ -10,8 +10,8 @@ function Navbar() {
       </Link>
 
       <Link
-        to="/create-post"
-        className="font-inter font-medium bg-[#6469ff] text-white px-4 py-2 rounded-md"
+        to="/post"
+        className="font-inter font-medium bg-[#6469ff] hover:bg-[#2f35f0] text-white px-4 py-2 rounded-md"
       >
         Create
       </Link>
