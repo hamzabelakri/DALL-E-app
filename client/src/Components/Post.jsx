@@ -62,8 +62,8 @@ console.log(image) */
       alert('Please provide proper prompt');
     }
   };
-   const handleSubmit = async (e) => {
-    e.preventDefault();
+   const handleSubmit = async (event) => {
+    event.preventDefault();
 
     if (form.prompt && form.photo) {
       setLoading(true);

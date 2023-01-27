@@ -48,7 +48,19 @@ function Home() {
 
 
               <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
-            {/*   {posts && posts.map((elt) => <Card key={elt._id} elt={elt} />)} */}
+              {posts.length === 0 ? (
+            <div class="flex justify-center items-center space-x-2">
+              <div
+                class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-600"
+                role="status"
+              >        
+              </div>
+            </div>
+          ) : (
+            posts
+              
+              .map((elt) => <Card key={elt._id} elt={elt} />)
+          )}
             </div>
            </>
             )}
