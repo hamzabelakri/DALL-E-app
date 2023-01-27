@@ -8,8 +8,8 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState('');
   const { posts } = useSelector((state) => state.postReducer);
-/*   console.log(posts)
- */  const dispatch = useDispatch();
+ console.log(posts)
+ const dispatch = useDispatch();
 
 
   useEffect(() => {

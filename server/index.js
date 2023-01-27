@@ -6,7 +6,6 @@ const cors = require("cors");
 const postRouter = require("./Routes/postRouter");
 const dalleRouter = require("./Routes/dalleRouter");
 
-
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 

@@ -25,15 +25,17 @@ const getAllPosts = async (req, res) => {
 const addPost = async (req, res) => {
   try {
     const { name, prompt, photo } = req.body;
-    const photoUrl = await cloudinary.uploader.upload(photo);
+   const photoUrl = await cloudinary.uploader.upload(photo); 
 
-    const newPost = await Post.create({
+    const newPost = new Post({
       name,
       prompt,
       photo: photoUrl.url,
-    });
 
-    res.status(200).json({ success: true, data: newPost });
+    });
+    await newPost.save();
+
+    res.status(200).json({ success: true, newPost });
   } catch (err) {
     res
       .status(500)
@@ -44,4 +46,14 @@ const addPost = async (req, res) => {
   }
 };
 
-module.exports = { getAllPosts, addPost };
+const deletePost = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const deletePost = await Post.findByIdAndRemove(id);
+    const posts = await Post.find();
+    res.status(201).json({ msg: "deleted successfully", posts });
+  } catch (error) {
+    res.status(400).json({ error: "failed to delete the post" });
+  }
+};
+module.exports = { getAllPosts, addPost, deletePost };
