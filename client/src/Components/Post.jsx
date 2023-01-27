@@ -17,7 +17,7 @@ function Post() {
     prompt: "",
     photo: "",
   });
-/*   const { image } = useSelector((state) => state.imageReducer);
+  /*   const { image } = useSelector((state) => state.imageReducer);
 console.log(image) */
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -31,7 +31,7 @@ console.log(image) */
     setForm({ ...form, prompt: randomPrompt });
   };
 
-/*   const generateImage = (event) => {
+  /*   const generateImage = (event) => {
     dispatch(getImage(form));
     setGeneratingImg(true);
     setForm({ ...form, photo: `data:image/jpeg;base64,${image}` });
@@ -41,10 +41,10 @@ console.log(image) */
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        const response = await fetch('http://localhost:7000/api/v1/dalle', {
-          method: 'POST',
+        const response = await fetch("http://localhost:7000/api/v1/dalle", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             prompt: form.prompt,
@@ -59,24 +59,29 @@ console.log(image) */
         setGeneratingImg(false);
       }
     } else {
-      alert('Please provide proper prompt');
+      alert("Please provide proper prompt");
     }
   };
-   const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (form.prompt && form.photo) {
       setLoading(true);
       try {
-        const { data } = await axios.post('http://localhost:7000/api/v1/post', form)
-
-        console.log(form)
-     
+        const response = await axios.post(
+          "http://localhost:7000/api/v1/post",
+          form
+        );
+        navigate('/');
       } catch (error) {
-
-        console.log( error)
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
-  }; }  
+    } else {
+      alert("Please generate an image with proper details");
+    }
+  };
 
   return (
     <section className="max-w-7xl mx-auto">
@@ -87,7 +92,7 @@ console.log(image) */
           community
         </p>
       </div>
-      <form className="mt-16 max-w-3xl"  onSubmit={handleSubmit} >
+      <form className="mt-16 max-w-3xl" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-5">
           <FormField
             labelName="Your Name"

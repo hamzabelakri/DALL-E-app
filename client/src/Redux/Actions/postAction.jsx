@@ -18,7 +18,7 @@ export const getAllPosts = () => async (dispatch) => {
   try {
     const response = await axios.get("http://localhost:7000/api/v1/post");
     dispatch({ type: GET_POSTS, payload: response.data });
-    console.log(response.data);
+/*     console.log(response.data); */
   } catch (error) {
     console.log(error);
   }
