@@ -72,7 +72,7 @@ console.log(image) */
           "http://localhost:7000/api/v1/post",
           form
         );
-        navigate('/');
+        navigate("/");
       } catch (error) {
         console.log(error);
       } finally {
@@ -140,7 +140,7 @@ console.log(image) */
             <button
               type="button"
               onClick={generateImage}
-              className=" text-white bg-green-700 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+              className=" text-white bg-green-700  hover:bg-green-800 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center"
             >
               {generatingImg ? "Generating..." : "Generate"}
             </button>
@@ -153,7 +153,7 @@ console.log(image) */
           </p>
           <button
             type="submit"
-            className="mt-3 text-white bg-[#6469ff] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+            className="mt-3 text-white bg-[#6469ff] hover:bg-[#494ffd]  font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center"
           >
             {loading ? "Sharing..." : "Share with the Community"}
           </button>
