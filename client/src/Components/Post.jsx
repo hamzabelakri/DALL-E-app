@@ -69,7 +69,7 @@ console.log(image) */
       setLoading(true);
       try {
         const response = await axios.post(
-          "http://localhost:7000/api/v1/post",
+          "https://dall-e-5sg1.onrender.com/api/v1/post",
           form
         );
         navigate("/");
