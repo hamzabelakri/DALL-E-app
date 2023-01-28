@@ -11,33 +11,38 @@ cloudinary.config({
 const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find();
-    res.status(200).json(posts);
+    res.status(200).json( posts );
   } catch (err) {
-    res.status(500).json({
-      success: false,
-      message: "Fetching posts failed, please try again",
-    });
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "Fetching posts failed, please try again",
+      });
   }
 };
 
 const addPost = async (req, res) => {
   try {
     const { name, prompt, photo } = req.body;
-    const photoUrl = await cloudinary.uploader.upload(photo);
+   const photoUrl = await cloudinary.uploader.upload(photo); 
 
     const newPost = new Post({
       name,
       prompt,
       photo: photoUrl.url,
+
     });
     await newPost.save();
 
     res.status(200).json({ success: true, newPost });
   } catch (err) {
-    res.status(500).json({
-      success: false,
-      message: "Unable to create a post, please try again",
-    });
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "Unable to create a post, please try again",
+      });
   }
 };
 
