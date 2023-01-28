@@ -18,7 +18,7 @@ const getApiImage = async (req, res) => {
     });
 
     const image = aiResponse.data.data[0].b64_json;
-    res.status(200).json( image );
+    res.status(200).json({ photo: image });
   } catch (error) {
     console.error(error);
     res

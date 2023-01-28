@@ -5,7 +5,7 @@ import Loader from "./Loader";
 import { getAllPosts } from "../Redux/Actions/postAction";
 import Card from "./Card";
 function Home() {
-  const [loading, setLoading] = useState(false);
+
   const [searchText, setSearchText] = useState("");
   const { posts } = useSelector((state) => state.postReducer);
   console.log(posts);
@@ -41,43 +41,28 @@ function Home() {
         />
       </div>
       <div className="mt-10">
-        {loading ? (
-          <div className="flex justify-center items-center">
-            <Loader />
-          </div>
-        ) : (
-          <>
-            {searchText && (
-              <h2 className="font-medium text-[#666e75] text-xl mb-3">
-                Showing Resuls for{" "}
-                <span className="text-[#222328]">{searchText}</span>:
-              </h2>
-            )}
-
-            <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
-              {posts.length === 0 ? (
-                <div class="flex justify-center items-center space-x-2">
-                  <div
-                    class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-600"
-                    role="status"
-                  ></div>
-                </div>
-              ) : (
-                posts
-                  .filter(
-                    (item) =>
-                      item.name
-                        .toLowerCase()
-                        .includes(searchText.toLowerCase()) ||
-                      item.prompt
-                        .toLowerCase()
-                        .includes(searchText.toLowerCase())
-                  )
-                  .map((elt) => <Card key={elt._id} elt={elt} />)
-              )}
-            </div>
-          </>
+        {searchText && (
+          <h2 className="font-medium text-[#666e75] text-xl mb-3">
+            Showing Resuls for{" "}
+            <span className="text-[#222328]">{searchText}</span>:
+          </h2>
         )}
+
+        <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
+          {posts.length === 0 ? (
+            <div className="flex justify-center items-center">
+              <Loader />
+            </div>
+          ) : (
+            posts
+              .filter(
+                (item) =>
+                  item.name.toLowerCase().includes(searchText.toLowerCase()) ||
+                  item.prompt.toLowerCase().includes(searchText.toLowerCase())
+              )
+              .map((elt) => <Card key={elt._id} elt={elt} />)
+          )}
+        </div>
       </div>
     </section>
   );

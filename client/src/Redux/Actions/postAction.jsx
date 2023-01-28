@@ -16,7 +16,7 @@ export const addPost = (form) => async (dispatch) => {
 
 export const getAllPosts = () => async (dispatch) => {
   try {
-    const response = await axios.get("http://localhost:7000/api/v1/post");
+    const response = await axios.get("https://dall-e-5sg1.onrender.com/api/v1/post");
     dispatch({ type: GET_POSTS, payload: response.data });
 /*     console.log(response.data); */
   } catch (error) {
