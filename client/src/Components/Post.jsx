@@ -8,6 +8,8 @@ import Loader from "./Loader";
 import FormField from "./FormField";
 import { getRandomPrompt } from "../utils";
 import axios from "axios";
+import {toast, Toaster } from "react-hot-toast";
+
 
 function Post() {
   const navigate = useNavigate();
@@ -52,14 +54,15 @@ console.log(image) */
         });
 
         const data = await response.json();
+        toast.success('Your photo is here')
         setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
       } catch (err) {
-        alert(err);
+        toast.error(err);
       } finally {
         setGeneratingImg(false);
       }
     } else {
-      alert("Please provide proper prompt");
+      toast.error("Please provide proper prompt");
     }
   };
   const handleSubmit = async (event) => {
@@ -72,6 +75,7 @@ console.log(image) */
           "https://dall-e-5sg1.onrender.com/api/v1/post",
           form
         );
+        toast.success('Photo added to community')
         navigate("/");
       } catch (error) {
         console.log(error);
@@ -79,12 +83,14 @@ console.log(image) */
         setLoading(false);
       }
     } else {
-      alert("Please generate an image with proper details");
+      toast.error("Please generate an image with proper details");
     }
   };
 
   return (
     <section className="max-w-7xl mx-auto">
+              <Toaster position="top-center" reverseOrder={false} />
+
       <div>
         <h1 className="font-extrabold text-[#222328] text-[32px]">Create</h1>
         <p className="mt-2 text-[#666e75] text-[14px] max-w-[500px]">
