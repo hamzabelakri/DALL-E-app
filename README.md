@@ -12,6 +12,6 @@ Used tools:
 
 ## Deployment
 
-- **Backend**: The backend of this project is deployed on Render: https://dall-e-5sg1.onrender.com
+The backend is deployed on Render and the frontend on Netlify
 
-- **Frontend**: The frontend of this project is deployed on Netlify: https://dalle-api.netlify.app/
+The project's website: https://dalle-api.netlify.app/
