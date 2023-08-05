@@ -10,7 +10,7 @@ Used tools:
 
 . Cloudinary
 
-## Deployment
+### Deployment
 
 - **Backend**: The backend of this project is deployed on Render: https://dall-e-5sg1.onrender.com
 
