@@ -1,4 +1,4 @@
-### a Full Stack MERN AI Image Generation App 
+## a Full Stack MERN AI Image Generation App 
 
 Used tools:
 
