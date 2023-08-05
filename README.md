@@ -9,3 +9,9 @@ Used tools:
 . OpenAI's DALL-E model
 
 . Cloudinary
+
+## Deployment
+
+- **Backend**: The backend of this project is deployed on Render: https://dall-e-5sg1.onrender.com
+
+- **Frontend**: The frontend of this project is deployed on Netlify: https://dalle-api.netlify.app/
